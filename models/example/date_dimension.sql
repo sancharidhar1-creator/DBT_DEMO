@@ -6,10 +6,10 @@ with CTE as(
      Date(To_timestamp(Started_At) ) As DATE_StartedAt,
      Hour(To_timestamp(Started_At) ) As  MonthStartedate,
 
-    Case when dayname(To_timestamp(Started_At) ) in ('Sat', 'Sun')
-    then 'WEEKEND'
-    else 'BUSINESS DAY'
-    END AS DAYTYPE
+    {{day_type('started_at')}} AS DAYTYPE,
+
+  {{get_Season('started_at')}}
+
      from 
      {{ source('demo', 'bike') }}
      where Started_At != 'started_at'
